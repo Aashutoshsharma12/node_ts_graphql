@@ -1,0 +1,12 @@
+build:
+  steps:
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+deploy:
+  steps:
+    - name: Deploy to Cyclic
+      run: npx cyclic deploy dist
