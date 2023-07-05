@@ -10,7 +10,9 @@ import { StatusCodes } from "http-status-codes";
 const vendor_resolvers = {
     Query: {
         getVendor: async (_: any, ID: any, userId: any) => {
+            console.log('enter')
             return new Promise(async (resolve, reject) => {
+                console.log(userId, "userId")
                 if (JSON.stringify(userId) === '{}') {
                     reject(new CustomError('Invalid Token', StatusCodes.NON_AUTHORITATIVE_INFORMATION));
                 } else {
@@ -118,12 +120,12 @@ const vendor_resolvers = {
             // if (JSON.stringify(user) === '{}') {
             //     throw new AuthenticationError('Token Expired')
             // } else {
-                const data = ID
-                console.log(data.ID,"LSLS")
+            const data = ID
+            console.log(data.ID, "LSLS")
 
-                const { name, email, phoneNumber } = data.vendorInput
-                const res = (await vendorModel.updateOne({ _id: data.ID }, { name: name, email: email, phoneNumber: phoneNumber })).modifiedCount;
-                return res;
+            const { name, email, phoneNumber } = data.vendorInput
+            const res = (await vendorModel.updateOne({ _id: data.ID }, { name: name, email: email, phoneNumber: phoneNumber })).modifiedCount;
+            return res;
             // }
 
         },
