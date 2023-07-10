@@ -6,7 +6,15 @@ import bcrypt from 'bcrypt'
 import upload from "../util/imageUploader";
 import { CustomError } from "../util/errors";
 import { StatusCodes } from "http-status-codes";
+const redis = require('ioredis')
+// const redisClient = new Redis();
+//send message
+const channel = 'news';
+const message = 'New article published';
+// import redis from 'redis'
+// const redis = require('redis')
 
+const publisher = redis.createClient({ host: '127.0.0.1', port: 6379, auth_pass: "P@ssw0rd" });
 const vendor_resolvers = {
     Query: {
         getVendor: async (_: any, ID: any, userId: any) => {
@@ -67,6 +75,7 @@ const vendor_resolvers = {
             }
             const details = await vendorModel.findOne({ email: email });
             if (details) {
+
                 throw new ApolloError('Vendor is already exists')
             } else {
                 const pass = bcrypt.hashSync(password, 10);
@@ -79,7 +88,9 @@ const vendor_resolvers = {
                 }, 'str34eet', { expiresIn: '30d' })
                 await sessionModel.create({ role: "Vendor", userId: res._id, status: true, token: token });
                 res.token = token
-                return (res);
+            const f = await publisher.lrange("details", 0, -1)
+            res.array1 = f[0]
+                return (res)
             }
         },
         //login
@@ -118,12 +129,12 @@ const vendor_resolvers = {
             // if (JSON.stringify(user) === '{}') {
             //     throw new AuthenticationError('Token Expired')
             // } else {
-                const data = ID
-                console.log(data.ID,"LSLS")
+            const data = ID
+            console.log(data.ID, "LSLS")
 
-                const { name, email, phoneNumber } = data.vendorInput
-                const res = (await vendorModel.updateOne({ _id: data.ID }, { name: name, email: email, phoneNumber: phoneNumber })).modifiedCount;
-                return res;
+            const { name, email, phoneNumber } = data.vendorInput
+            const res = (await vendorModel.updateOne({ _id: data.ID }, { name: name, email: email, phoneNumber: phoneNumber })).modifiedCount;
+            return res;
             // }
 
         },

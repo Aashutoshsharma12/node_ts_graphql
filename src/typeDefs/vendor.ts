@@ -13,6 +13,7 @@ type Vendor {
     token:String
     image:String
     totalSum:Int
+    array1:String
 }
 type VendorDetails {
     vendor:Vendor!
