@@ -18,7 +18,9 @@ const publisher = redis.createClient({ host: '127.0.0.1', port: 6379, auth_pass:
 const vendor_resolvers = {
     Query: {
         getVendor: async (_: any, ID: any, userId: any) => {
+            console.log('enter')
             return new Promise(async (resolve, reject) => {
+                console.log(userId, "userId")
                 if (JSON.stringify(userId) === '{}') {
                     reject(new CustomError('Invalid Token', StatusCodes.NON_AUTHORITATIVE_INFORMATION));
                 } else {
