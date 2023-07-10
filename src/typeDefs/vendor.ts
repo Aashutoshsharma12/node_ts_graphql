@@ -6,6 +6,7 @@ type Vendor {
     name:String
     email:String
     phoneNumber:Number 
+    createdAt:Date
     updatedAt:Date
     _id:String
     count:Int
