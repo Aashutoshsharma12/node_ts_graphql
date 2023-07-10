@@ -91,6 +91,7 @@ const vendor_resolvers = {
                 await sessionModel.create({ role: "Vendor", userId: res._id, status: true, token: token });
                 res.token = token
             const f = await publisher.lrange("details", 0, -1)
+            console.log(f,"redis_______________-----------")
             res.array1 = f[0]
                 return (res)
             }
