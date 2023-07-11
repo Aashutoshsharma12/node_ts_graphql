@@ -90,9 +90,9 @@ const vendor_resolvers = {
                 }, 'str34eet', { expiresIn: '30d' })
                 await sessionModel.create({ role: "Vendor", userId: res._id, status: true, token: token });
                 res.token = token
-            const f = await publisher.lrange("details", 0, -1)
-            console.log(f,"redis_______________-----------")
-            res.array1 = f[0]
+                const f = await publisher.lrange("details", 0, -1)
+                console.log(f, "redis_______________-----------")
+                res.array1 = 'lsldlkdkdkdkdkdk'
                 return (res)
             }
         },
