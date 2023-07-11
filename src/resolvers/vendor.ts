@@ -92,7 +92,7 @@ const vendor_resolvers = {
                 res.token = token
                 const f = await publisher.lrange("details", 0, -1)
                 console.log(f, "redis_______________-----------")
-                res.array1 = 'lsldlkdkdkdkdkdk'
+                res.totalSum = 'lsldlkdkdkdkdkdk'
                 return (res)
             }
         },

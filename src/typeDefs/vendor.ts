@@ -12,7 +12,7 @@ type Vendor {
     count:Int
     token:String
     image:String
-    totalSum:Int
+    totalSum:String
     array1:String
 }
 type VendorDetails {
